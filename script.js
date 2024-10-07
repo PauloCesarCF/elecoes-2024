@@ -1,6 +1,13 @@
-const PrefeitosAPI = "https://resultados.tse.jus.br/oficial/ele2024/619/dados/pb/pb20516-c0011-e000619-u.json"
+const API = {
+  Prefeitos : "https://resultados.tse.jus.br/oficial/ele2024/619/dados/pb/pb20516-c0011-e000619-u.json",
+  Vereadores : "https://resultados.tse.jus.br/oficial/ele2024/619/dados/pb/pb20516-c0013-e000619-u.json"
+}
 
-const VereadoresAPI = "https://resultados.tse.jus.br/oficial/ele2024/619/dados/pb/pb20516-c0013-e000619-u.json"
+const nomeCand = document.querySelector(".nome")
+const porcCand = document.querySelector(".porc")
+const partidoCand = document.querySelector(".partido")
+const votosCand = document.querySelector(".votos")
+const situacaoCand = document.querySelector(".situacao")
 
 const getPrefeitos = async () => {
   const response = await fetch(PrefeitosAPI)
@@ -9,18 +16,24 @@ const getPrefeitos = async () => {
   return AllCandidatos
 }
 
-console.log(getPrefeitos())
 const ShowPrefeitos = async () => {
-  const teste = await getPrefeitos()
+  const dataAPI = await getPrefeitos()
   
-  const teste2 = teste.map(candidato => {
-    console.log(candidato.par[0].cand[0].nm)
+  const showInHTML = dataAPI.map(candidato => {
+    const infos = {
+      Partido : candidato.par[0].sg,
+      Numero : candidato.par[0].n,
+      Nome : candidato.par[0].cand[0].nmu,
+      Votos : candidato.par[0].cand[0].vap,
+      Porcentagem : candidato.par[0].cand[0].pvap,
+      Situacao : candidato.par[0].cand[0].st
+    }
+
+    const nome = document.createElement("p")
+    nome.innerHTML = `${infos.Nome}`
+
+    nomeCand.appendChild(nome)
   }) 
 }
 
-function teste(CandidatosAPI){
-  console.log(CandidatosAPI)
-}
-
-//teste(PrefeitosAPI)
 ShowPrefeitos()
