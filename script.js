@@ -10,7 +10,7 @@ const votosCand = document.querySelector(".votos")
 const situacaoCand = document.querySelector(".situacao")
 
 const getPrefeitos = async () => {
-  const response = await fetch(PrefeitosAPI)
+  const response = await fetch(API.Prefeitos)
   const data = await response.json()
   const AllCandidatos = data.carg[0].agr
   return AllCandidatos
