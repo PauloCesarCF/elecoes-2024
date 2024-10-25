@@ -9,6 +9,10 @@ const partidoCand = document.querySelector(".partido")
 const votosCand = document.querySelector(".votos")
 const situacaoCand = document.querySelector(".situacao")
 
+const loop = setInterval(() => {
+  console.log('teste')
+}, 10)
+
 const getPrefeitos = async () => {
   const response = await fetch(API.Prefeitos)
   const data = await response.json()
